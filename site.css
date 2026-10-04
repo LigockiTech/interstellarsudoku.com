@@ -1,0 +1,519 @@
+/* Interstellar Sudoku website.
+   One stylesheet for every page. The colours, the three typefaces and the
+   glyphs are the app's own, so the site and the app read as one thing.
+   Nothing here loads from another host. */
+
+/* ---------- Typefaces, served from this site ---------- */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("fonts/instrument-sans.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* Digits only: in the app this face sets the puzzle's own digits and nothing else. */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("fonts/instrument-serif-digits.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0030-0039;
+}
+
+/* ---------- Tokens ---------- */
+
+:root {
+  color-scheme: dark;
+
+  --ground: #081210;
+  --ground-deep: #060e0c;
+  --surface: rgba(232, 242, 238, 0.06);
+  --line: rgba(232, 242, 238, 0.12);
+  --ink: #e8f2ee;
+  --ink-muted: #a3b8b1;
+  --ink-faint: #8fa8a0;
+  --link: #7de0c2;
+
+  /* One meaning per colour, as in the app. */
+  --progress: #3fd6b0;   /* the journey, play, hints */
+  --daily: #a99bff;      /* the daily challenge */
+  --streak: #f0a35e;     /* the streak */
+
+  --aurora-teal: rgba(63, 214, 176, 0.38);
+  --aurora-violet: rgba(139, 123, 247, 0.36);
+  --aurora-cyan: rgba(79, 216, 232, 0.16);
+
+  --font-display: "Bricolage Grotesque", "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-given: "Instrument Serif", Georgia, "Times New Roman", serif;
+
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+/* The policy follows the reader's device, as the app does. The home page and
+   the error page stay dark, which is the app's own face. */
+@media (prefers-color-scheme: light) {
+  :root.follows-device {
+    color-scheme: light;
+
+    --ground: #f3f7f5;
+    --surface: #ffffff;
+    --line: rgba(18, 33, 28, 0.14);
+    --ink: #12211c;
+    --ink-muted: #3f514b;
+    --ink-faint: #56675f;
+    --link: #00695c;
+
+    --progress: #00796b;
+    --daily: #5a4ab8;
+    --streak: #9a5a1c;
+
+    --aurora-teal: rgba(0, 121, 107, 0.2);
+    --aurora-violet: rgba(106, 90, 205, 0.16);
+    --aurora-cyan: rgba(38, 166, 183, 0.12);
+  }
+}
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure, address, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+address { font-style: normal; }
+svg { display: block; }
+.nowrap { white-space: nowrap; }
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 2px solid var(--progress); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  width: 100%;
+  max-width: 70rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 3;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  background: var(--ink);
+  color: var(--ground);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- The aurora: still, behind the top of every page, carrying no information ---------- */
+
+body { position: relative; isolation: isolate; overflow-x: clip; }
+body::before {
+  content: "";
+  position: absolute;
+  inset: -4rem 0 auto 0;
+  height: 44rem;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 44rem 24rem at 4% 6%, var(--aurora-teal), transparent 70%),
+    radial-gradient(ellipse 46rem 24rem at 98% 8%, var(--aurora-violet), transparent 70%),
+    radial-gradient(ellipse 30rem 14rem at 54% 22%, var(--aurora-cyan), transparent 70%);
+  filter: blur(36px);
+  pointer-events: none;
+}
+body.sky-low::before { height: 26rem; }
+
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1.25rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.brand-mark { width: 2rem; height: 2rem; flex: none; border-radius: 0.55rem; box-shadow: 0 0 0 1px rgba(232, 242, 238, 0.16); }
+
+.site-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; }
+/* Full ink, not the muted one: on a phone these links sit on the brightest part of the aurora. */
+.site-nav a {
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.site-nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.site-nav .wide-only { display: none; }
+
+/* ---------- Home: hero ---------- */
+
+.hero { position: relative; }
+/* Faint stars, as on the app's Home and Journey. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(1.5px 1.5px at 7% 12%, rgba(207, 233, 224, 0.7), transparent),
+    radial-gradient(1px 1px at 22% 78%, rgba(207, 233, 224, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 38% 6%, rgba(207, 233, 224, 0.6), transparent),
+    radial-gradient(1px 1px at 46% 62%, rgba(207, 233, 224, 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 58% 28%, rgba(207, 233, 224, 0.55), transparent),
+    radial-gradient(1px 1px at 71% 90%, rgba(207, 233, 224, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 93% 44%, rgba(207, 233, 224, 0.6), transparent),
+    radial-gradient(1px 1px at 3% 54%, rgba(207, 233, 224, 0.45), transparent);
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  padding-block: clamp(2rem, 6vw, 4rem) clamp(2rem, 6vw, 4rem);
+}
+
+.hero h1 {
+  max-width: 12em;
+  font-family: var(--font-display);
+  /* The cap in vw keeps the longest word inside a phone screen when the
+     reader has doubled the text size. */
+  font-size: min(clamp(2.75rem, 1.55rem + 5.6vw, 5.5rem), 15.5vw);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.lede {
+  max-width: 33rem;
+  margin-top: 1.5rem;
+  font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  line-height: 1.5;
+}
+
+/* The marker is the app's own sign for a stop not yet reached. */
+.status {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  max-width: 33rem;
+  margin-top: 1.75rem;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+.status svg { width: 1.25rem; height: 1.25rem; flex: none; margin-top: 0.15rem; }
+.status strong { color: var(--ink); font-weight: 600; }
+
+.trail { width: 100%; max-width: 23rem; margin-inline: auto; }
+.trail svg { width: 100%; height: auto; overflow: visible; }
+.trail .num { font-family: var(--font-body); font-weight: 600; text-anchor: middle; font-variant-numeric: tabular-nums; }
+.trail .here { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-anchor: middle; fill: #9fe8d3; }
+
+/* ---------- Home: sections ---------- */
+
+.section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.section-tight { padding-block: 0 clamp(3rem, 7vw, 5.5rem); }
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.play-grid { display: grid; gap: 2.5rem; margin-top: clamp(1.75rem, 4vw, 2.75rem); }
+
+.board { width: 100%; max-width: 24rem; margin-inline: auto; }
+.board figcaption { margin-top: 1.1rem; color: var(--ink-muted); font-size: 0.9375rem; line-height: 1.55; }
+.board-art { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 0 28px rgba(63, 214, 176, 0.12)); }
+.board-art text { text-anchor: middle; }
+.board-art .given text { font-family: var(--font-given); font-size: 23px; fill: #edf6f2; }
+.board-art .entry text { font-family: var(--font-body); font-size: 19px; font-weight: 600; fill: #3fd6b0; }
+.board-art .lit text { fill: #ffffff; }
+.board-art .note text { font-family: var(--font-body); font-size: 8.5px; fill: #7d948c; }
+.board-art .caption { font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; fill: #7de0c2; }
+
+.features li {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0 1.1rem;
+  padding-block: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+.features li:first-child { padding-top: 0; border-top: 0; }
+.features svg { width: 1.5rem; height: 1.5rem; margin-top: 0.2rem; }
+.features h3 {
+  font-family: var(--font-display);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.features p { margin-top: 0.35rem; color: var(--ink-muted); }
+.glyph-progress { color: var(--progress); }
+.glyph-daily { color: var(--daily); }
+.glyph-streak { color: var(--streak); }
+
+.facts {
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-muted);
+}
+
+.pair { display: grid; gap: 2.5rem; padding-top: clamp(2.5rem, 6vw, 4rem); border-top: 1px solid var(--line); }
+.pair h2 { font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); }
+.pair p { max-width: 31rem; margin-top: 0.85rem; color: var(--ink-muted); }
+.pair p + p { margin-top: 1rem; }
+.pair a { font-weight: 600; }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  --ink: #e8f2ee;
+  --ink-muted: #a3b8b1;
+  --line: rgba(232, 242, 238, 0.12);
+  --link: #e8f2ee;
+  background: var(--ground-deep);
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+.footer-grid { display: grid; gap: 2rem; padding-block: clamp(2.5rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem); }
+.footer-brand p { max-width: 18rem; margin-top: 0.9rem; }
+.site-footer h2 {
+  margin-bottom: 0.7rem;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.site-footer a { text-decoration-color: rgba(232, 242, 238, 0.4); }
+.site-footer a:hover { text-decoration-color: currentColor; }
+.site-footer li + li { margin-top: 0.35rem; }
+.legal-name { margin-bottom: 0.5rem; color: var(--ink); font-weight: 600; line-height: 1.45; }
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 2rem;
+  padding-block: 1.25rem 2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+}
+
+/* ---------- Policy ---------- */
+
+.doc-head { padding-block: clamp(1.5rem, 5vw, 3rem) clamp(1.75rem, 4vw, 2.5rem); }
+.doc-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.9rem + 3vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.doc-meta { display: flex; flex-wrap: wrap; gap: 0.25rem 2rem; margin-top: 1.25rem; color: var(--ink-muted); font-size: 0.9375rem; }
+.doc-meta div { display: flex; gap: 0.4rem; }
+.doc-meta dt { font-weight: 400; }
+.doc-meta dd { color: var(--ink); font-weight: 600; }
+
+.doc { padding-bottom: clamp(3rem, 8vw, 6rem); line-height: 1.65; }
+.doc > *, .doc-text > * { max-width: 41rem; }
+.doc > .wide, .doc > .doc-body { max-width: none; }
+
+.doc .intro { font-size: 1.1875rem; line-height: 1.55; }
+
+.doc h2 {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 1rem;
+}
+.doc h3 { margin-top: 1.75rem; font-size: 1.0625rem; font-weight: 600; line-height: 1.4; }
+.doc p, .doc ul, .doc address { margin-top: 1rem; }
+.doc h3 + p { margin-top: 0.4rem; }
+.doc ul { padding-left: 1.2rem; list-style: disc; }
+.doc li + li { margin-top: 0.5rem; }
+.doc li::marker { color: var(--ink-faint); }
+.doc strong { font-weight: 600; }
+.doc a { overflow-wrap: anywhere; }
+
+.doc .key {
+  margin-top: 1.25rem;
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--progress);
+  border-radius: 0 0.6rem 0.6rem 0;
+  background: var(--surface);
+  font-weight: 600;
+}
+
+.contents { margin-top: 2rem; padding: 1.15rem 1.25rem 1.25rem; border: 1px solid var(--line); border-radius: 0.9rem; background: var(--surface); }
+.contents h2 { margin: 0; padding: 0; border: 0; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 600; letter-spacing: 0; }
+.contents ol { margin-top: 0.6rem; padding-left: 1.4rem; list-style: decimal; columns: 2 14rem; column-gap: 2.5rem; }
+.contents li { break-inside: avoid; padding-block: 0.15rem; }
+.contents li + li { margin-top: 0; }
+.contents li::marker { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+.table-wrap { margin-top: 1.5rem; }
+.doc table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.5; }
+.doc caption { padding-bottom: 0.6rem; color: var(--ink-muted); font-size: 0.9375rem; text-align: left; }
+.doc th, .doc td { padding: 0.8rem 1rem 0.8rem 0; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.doc thead th { border-top: 0; color: var(--ink-muted); font-size: 0.875rem; font-weight: 600; }
+.doc tbody th { width: 9.5rem; font-weight: 600; }
+.doc th:last-child, .doc td:last-child { padding-right: 0; }
+
+/* On a phone each row of a table becomes its own labelled block. */
+@media screen and (max-width: 43.99rem) {
+  .doc table, .doc caption, .doc tbody, .doc tr, .doc th, .doc td { display: block; width: auto; }
+  .doc tbody th { width: auto; }
+  .doc thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .doc tr { padding-block: 0.9rem; border-top: 1px solid var(--line); }
+  .doc th, .doc td { padding: 0; border: 0; }
+  .doc tbody th { font-size: 1rem; }
+  .doc td { margin-top: 0.55rem; }
+  .doc td::before { content: attr(data-label); display: block; color: var(--ink-faint); font-size: 0.8125rem; font-weight: 600; }
+}
+
+/* ---------- Error page ---------- */
+
+.lost { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+.lost main { flex: 1; display: flex; align-items: center; padding-block: clamp(2.5rem, 8vw, 5rem); }
+.lost-ring { width: 5.5rem; height: 5.5rem; }
+.lost-ring text { font-family: var(--font-body); font-size: 22px; font-weight: 600; text-anchor: middle; fill: rgba(232, 242, 238, 0.78); font-variant-numeric: tabular-nums; }
+.lost h1 {
+  max-width: 14em;
+  margin-top: 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.6rem + 4.4vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.lost .lede { color: var(--ink-muted); }
+.lost-links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin-top: 2rem; font-weight: 600; }
+
+/* On a wide screen the list of sections stays in view beside the text. */
+@media (min-width: 64rem) {
+  .doc-body { display: grid; grid-template-columns: minmax(0, 41rem) minmax(0, 1fr); column-gap: clamp(3rem, 7vw, 6rem); align-items: start; }
+  .doc-text { grid-column: 1; grid-row: 1; }
+  .doc-body .contents {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 1.5rem;
+    max-width: 17rem;
+    margin-top: 3rem;
+    padding: 1.5rem 0 0.25rem 1.5rem;
+    border: 0;
+    border-left: 1px solid var(--line);
+    border-radius: 0;
+    background: none;
+  }
+  .doc-body .contents ol { columns: auto; }
+  .doc-body .contents a { text-decoration: none; }
+  .doc-body .contents a:hover { text-decoration: underline; }
+}
+
+/* ---------- Wider screens ---------- */
+
+@media (min-width: 40rem) {
+  .site-nav .wide-only { display: block; }
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 56rem) {
+  .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 2rem; }
+  .trail { max-width: 30rem; margin-right: 0; }
+
+  .play-grid { grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+  .board { margin-left: 0; }
+
+  .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 6vw, 5rem); }
+
+  .footer-grid { grid-template-columns: 1.1fr 1.6fr 1.1fr 0.8fr; gap: 2.5rem; }
+}
+
+/* ---------- Motion, only for people who have not asked for less of it ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  /* One moment, once: the stars behind you light in the order you passed them,
+     and the stop you stand on settles last. */
+  .trail .passed { animation: light 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; transform-box: fill-box; transform-origin: center; }
+  .trail .passed-4 { animation-delay: 0.15s; }
+  .trail .passed-3 { animation-delay: 0.35s; }
+  .trail .passed-2 { animation-delay: 0.55s; }
+  .trail .passed-1 { animation-delay: 0.75s; }
+  .trail .current { animation: arrive 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.95s backwards; transform-box: fill-box; transform-origin: center; }
+
+  @keyframes light { from { opacity: 0; transform: scale(0.4); } }
+  @keyframes arrive { from { opacity: 0; transform: scale(0.86); } }
+}
+
+/* ---------- Paper ---------- */
+
+@media print {
+  :root, :root.follows-device {
+    color-scheme: light;
+    --ground: #ffffff;
+    --surface: #ffffff;
+    --line: #b9c2bf;
+    --ink: #000000;
+    --ink-muted: #2c3633;
+    --ink-faint: #4a5652;
+    --link: #000000;
+    --progress: #00796b;
+    --daily: #5a4ab8;
+    --streak: #9a5a1c;
+  }
+  body { font-size: 11pt; }
+  body::before, .hero::before, .skip, .site-nav, .contents, .trail { display: none; }
+  .site-footer { --ink: #000000; --ink-muted: #2c3633; --line: #b9c2bf; --link: #000000; background: none; }
+  .doc h2, .doc h3 { break-after: avoid; }
+  .doc tr, .doc li { break-inside: avoid; }
+  .doc a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; }
+}

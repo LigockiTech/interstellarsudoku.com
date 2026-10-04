@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <title>Interstellar Sudoku</title>
+  <defs>
+    <linearGradient id="tile" x1=".28" y1="-.1" x2=".72" y2="1.1">
+      <stop offset="0" stop-color="#0a1a15"/>
+      <stop offset="1" stop-color="#0e2b23"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#tile)"/>
+  <path d="M20 78h80M20 42h80M42 20v80M78 20v80" fill="none" stroke="#e8f2ee" stroke-opacity=".16" stroke-width="3" stroke-linecap="round"/>
+  <rect x="46" y="46" width="28" height="28" rx="6" fill="#3fd6b0"/>
+</svg>

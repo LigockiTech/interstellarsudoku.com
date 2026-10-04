@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interstellar Sudoku | A sudoku that goes somewhere</title>
+<meta name="description" content="Interstellar Sudoku is a sudoku game for iOS and Android in which every puzzle is a stop on one long journey. In development by LigockiTech.">
+<link rel="canonical" href="https://interstellarsudoku.com/">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#081210">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Interstellar Sudoku">
+<meta property="og:url" content="https://interstellarsudoku.com/">
+<meta property="og:title" content="Interstellar Sudoku">
+<meta property="og:description" content="A sudoku that goes somewhere. A sudoku game for iOS and Android, in development by LigockiTech.">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-current="page">
+      <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+        <defs><linearGradient id="mark-tile" x1=".28" y1="-.1" x2=".72" y2="1.1"><stop offset="0" stop-color="#0a1a15"/><stop offset="1" stop-color="#0e2b23"/></linearGradient></defs>
+        <rect width="120" height="120" fill="url(#mark-tile)"/>
+        <path d="M20 78h80M20 42h80M42 20v80M78 20v80" fill="none" stroke="#e8f2ee" stroke-opacity=".16" stroke-width="3" stroke-linecap="round"/>
+        <rect x="46" y="46" width="28" height="28" rx="6" fill="#3fd6b0"/>
+      </svg>
+      <span translate="no">Interstellar Sudoku</span>
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <ul>
+        <li class="wide-only"><a href="#how-it-plays">How it plays</a></li>
+        <li class="wide-only"><a href="#who-makes-it">Who makes it</a></li>
+        <li><a href="/privacy">Privacy policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="hero-title">A sudoku that goes somewhere.</h1>
+        <p class="lede"><span translate="no">Interstellar Sudoku</span> is a sudoku game for iOS and Android. There is no difficulty to choose: every puzzle is a stop on one long journey, and solving it moves you on to the next.</p>
+        <p class="status">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2.66" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.1"/></svg>
+          <span><strong>In development.</strong> The app is not in the App Store or on Google Play yet.</span>
+        </p>
+      </div>
+
+      <div class="trail">
+        <svg viewBox="0 22 390 526" role="img" aria-labelledby="trail-title">
+          <title id="trail-title">Illustration of the journey: the stops already solved shine as stars on the path behind, the current stop glows, and the stops ahead are unlit rings.</title>
+          <defs>
+            <linearGradient id="trail-done" gradientUnits="userSpaceOnUse" x1="70" y1="525.4" x2="104" y2="344.2"><stop offset="0" stop-color="#2fc9a0" stop-opacity="0"/><stop offset=".45" stop-color="#1d6553"/><stop offset="1" stop-color="#2fb896"/></linearGradient>
+            <linearGradient id="trail-ahead" gradientUnits="userSpaceOnUse" x1="104" y1="344.2" x2="350" y2="43.6"><stop offset="0" stop-color="#e8f2ee" stop-opacity=".3"/><stop offset=".72" stop-color="#e8f2ee" stop-opacity=".2"/><stop offset="1" stop-color="#e8f2ee" stop-opacity="0"/></linearGradient>
+            <linearGradient id="trail-disc" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#0e5b47"/><stop offset=".55" stop-color="#14806a"/><stop offset="1" stop-color="#2ba489"/></linearGradient>
+            <radialGradient id="trail-glow"><stop offset="0" stop-color="#3fd6b0" stop-opacity=".6"/><stop offset=".45" stop-color="#3fd6b0" stop-opacity=".22"/><stop offset="1" stop-color="#3fd6b0" stop-opacity="0"/></radialGradient>
+            <filter id="trail-blur" x="-150%" y="-150%" width="400%" height="400%"><feGaussianBlur stdDeviation="2.4"/></filter>
+            <mask id="trail-gaps" maskUnits="userSpaceOnUse" x="0" y="0" width="390" height="548">
+              <rect width="390" height="548" fill="#fff"/>
+              <circle cx="104" cy="344.2" r="45"/><circle cx="286" cy="259.3" r="27"/><circle cx="150" cy="172.1" r="21"/><circle cx="296" cy="87.2" r="24"/>
+            </mask>
+            <path id="trail-star" d="M12 0C13 8 17 12.6 24 13.8 17 14.9 13 19.5 12 27.5 11 19.5 7 14.9 0 13.8 7 12.6 11 8 12 0Z"/>
+          </defs>
+
+          <g fill="#cfe9e0">
+            <circle cx="36" cy="118" r="1" opacity=".55"/><circle cx="212" cy="38" r="1.2" opacity=".6"/><circle cx="352" cy="170" r="1" opacity=".5"/><circle cx="64" cy="232" r="1.3" opacity=".7"/><circle cx="228" cy="352" r="1" opacity=".45"/><circle cx="334" cy="392" r="1.4" opacity=".6"/><circle cx="20" cy="468" r="1" opacity=".4"/><circle cx="308" cy="508" r="1" opacity=".5"/><circle cx="96" cy="58" r="1" opacity=".45"/>
+          </g>
+
+          <path d="M104 344.2C130 300.6 240 314.3 286 259.3 322 215.7 190 218 150 172.1 118 135.4 250 126.2 296 87.2 322 66.5 338 55.1 350 43.6" fill="none" stroke="url(#trail-ahead)" stroke-width="3" stroke-dasharray="1 8" stroke-linecap="round" mask="url(#trail-gaps)"/>
+          <path d="M70 525.4C120 516.2 160 504.8 184 486.4 216 463.5 232 458.9 252 445.1 290 419.9 130 401.5 104 344.2" fill="none" stroke="url(#trail-done)" stroke-width="2.5" stroke-linecap="round"/>
+
+          <g class="passed passed-4" fill="#2fc9a0" opacity=".34"><use href="#trail-star" transform="translate(82 516.2) scale(.5)" filter="url(#trail-blur)"/><use href="#trail-star" transform="translate(82 516.2) scale(.5)"/></g>
+          <g class="passed passed-3" fill="#f2f7fd" opacity=".5"><use href="#trail-star" transform="translate(121 501.3) scale(.625)" filter="url(#trail-blur)"/><use href="#trail-star" transform="translate(121 501.3) scale(.625)"/></g>
+          <g class="passed passed-2" fill="#4fd8e8" opacity=".72"><use href="#trail-star" transform="translate(175 476.1) scale(.75)" filter="url(#trail-blur)"/><use href="#trail-star" transform="translate(175 476.1) scale(.75)"/></g>
+          <g class="passed passed-1" fill="#bcd8f8"><use href="#trail-star" transform="translate(241 432.5) scale(.9167)" filter="url(#trail-blur)"/><use href="#trail-star" transform="translate(241 432.5) scale(.9167)"/></g>
+
+          <g class="current">
+            <circle cx="104" cy="344.2" r="78" fill="url(#trail-glow)"/>
+            <circle cx="104" cy="344.2" r="40.75" fill="none" stroke="#bcd8f8" stroke-width="2.5"/>
+            <circle cx="104" cy="344.2" r="36.75" fill="none" stroke="#081210" stroke-width="5.5"/>
+            <circle cx="104" cy="344.2" r="33" fill="url(#trail-disc)" stroke="#3fd6b0" stroke-width="2"/>
+            <text class="num" x="104" y="354.8" font-size="30" fill="#eafff7">87</text>
+          </g>
+          <text class="here" x="104" y="410">YOU ARE HERE</text>
+
+          <g fill="none" stroke-width="1.5" stroke-dasharray="4 3.2">
+            <circle cx="286" cy="259.3" r="24.25" stroke="#f2f7fd" stroke-opacity=".55"/>
+            <circle cx="150" cy="172.1" r="18.25" stroke="#4fd8e8" stroke-opacity=".55"/>
+            <circle cx="296" cy="87.2" r="21.25" stroke="#bcd8f8" stroke-opacity=".55"/>
+          </g>
+          <text class="num" x="286" y="265" font-size="16" fill="#f2f7fd" fill-opacity=".82">88</text>
+          <text class="num" x="150" y="176.7" font-size="13" fill="#4fd8e8" fill-opacity=".86">89</text>
+          <text class="num" x="296" y="92.5" font-size="15" fill="#bcd8f8" fill-opacity=".84">90</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-plays" aria-labelledby="how-it-plays-title">
+    <div class="wrap">
+      <h2 id="how-it-plays-title">How it plays</h2>
+      <div class="play-grid">
+        <figure class="board">
+          <svg class="board-art" viewBox="0 0 347 381" role="img" aria-labelledby="board-art-title">
+            <title id="board-art-title">Illustration of a sudoku board from the app: the puzzle’s own digits in a serif face, the player’s digits in teal, one row complete and one square selected.</title>
+            <defs>
+              <clipPath id="board-clip"><rect x="2" y="2" width="343" height="343" rx="10"/></clipPath>
+              <linearGradient id="board-lit" x1="0" y1="0" x2="1" y2="0.6"><stop offset="0" stop-color="#3fd6b0" stop-opacity=".28"/><stop offset="1" stop-color="#4fd8e8" stop-opacity=".22"/></linearGradient>
+              <linearGradient id="rule-in" x1="0" x2="1"><stop offset="0" stop-color="#3fd6b0" stop-opacity="0"/><stop offset="1" stop-color="#3fd6b0"/></linearGradient>
+              <linearGradient id="rule-out" x1="0" x2="1"><stop offset="0" stop-color="#3fd6b0"/><stop offset="1" stop-color="#3fd6b0" stop-opacity="0"/></linearGradient>
+            </defs>
+            <rect width="347" height="347" rx="12" fill="#0c1d18"/>
+            <rect width="347" height="347" rx="12" fill="#3fd6b0" fill-opacity=".3"/>
+            <g clip-path="url(#board-clip)">
+              <path d="M2 2h113v113h-113zM117 2h113v113h-113zM232 2h113v113h-113zM2 117h113v113h-113zM117 117h113v113h-113zM232 117h113v113h-113zM2 232h113v113h-113zM117 232h113v113h-113zM232 232h113v113h-113z" fill="#0c1d18"/>
+              <path d="M2 2h113v113h-113zM117 2h113v113h-113zM232 2h113v113h-113zM2 117h113v113h-113zM117 117h113v113h-113zM232 117h113v113h-113zM2 232h113v113h-113zM117 232h113v113h-113zM232 232h113v113h-113z" fill="#e8f2ee" fill-opacity=".09"/>
+              <path d="M2 2h37v37h-37zM40 2h37v37h-37zM78 2h37v37h-37zM117 2h37v37h-37zM155 2h37v37h-37zM193 2h37v37h-37zM232 2h37v37h-37zM270 2h37v37h-37zM308 2h37v37h-37zM2 40h37v37h-37zM40 40h37v37h-37zM78 40h37v37h-37zM117 40h37v37h-37zM155 40h37v37h-37zM193 40h37v37h-37zM232 40h37v37h-37zM270 40h37v37h-37zM308 40h37v37h-37zM2 78h37v37h-37zM40 78h37v37h-37zM78 78h37v37h-37zM117 78h37v37h-37zM155 78h37v37h-37zM193 78h37v37h-37zM232 78h37v37h-37zM308 78h37v37h-37zM2 117h37v37h-37zM40 117h37v37h-37zM78 117h37v37h-37zM117 117h37v37h-37zM155 117h37v37h-37zM193 117h37v37h-37zM232 117h37v37h-37zM270 117h37v37h-37zM308 117h37v37h-37zM2 155h37v37h-37zM40 155h37v37h-37zM78 155h37v37h-37zM117 155h37v37h-37zM155 155h37v37h-37zM193 155h37v37h-37zM232 155h37v37h-37zM270 155h37v37h-37zM308 155h37v37h-37zM2 193h37v37h-37zM40 193h37v37h-37zM78 193h37v37h-37zM117 193h37v37h-37zM155 193h37v37h-37zM193 193h37v37h-37zM232 193h37v37h-37zM270 193h37v37h-37zM308 193h37v37h-37zM2 270h37v37h-37zM40 270h37v37h-37zM78 270h37v37h-37zM117 270h37v37h-37zM155 270h37v37h-37zM193 270h37v37h-37zM232 270h37v37h-37zM270 270h37v37h-37zM308 270h37v37h-37zM2 308h37v37h-37zM40 308h37v37h-37zM78 308h37v37h-37zM117 308h37v37h-37zM155 308h37v37h-37zM193 308h37v37h-37zM232 308h37v37h-37zM270 308h37v37h-37zM308 308h37v37h-37z" fill="#0c1d18"/>
+              <path d="M2 232h37v37h-37zM40 232h37v37h-37zM78 232h37v37h-37zM117 232h37v37h-37zM155 232h37v37h-37zM193 232h37v37h-37zM232 232h37v37h-37zM270 232h37v37h-37zM308 232h37v37h-37z" fill="#0c1d18"/>
+              <path d="M2 232h37v37h-37zM40 232h37v37h-37zM78 232h37v37h-37zM117 232h37v37h-37zM155 232h37v37h-37zM193 232h37v37h-37zM232 232h37v37h-37zM270 232h37v37h-37zM308 232h37v37h-37z" fill="url(#board-lit)"/>
+              <rect x="270" y="78" width="37" height="37" fill="#10312a"/>
+              <rect x="271" y="79" width="35" height="35" fill="none" stroke="#3fd6b0" stroke-width="2"/>
+            </g>
+            <g class="given"><text x="96.5" y="28">3</text><text x="135.5" y="28">1</text><text x="173.5" y="28">9</text><text x="135.5" y="66">8</text><text x="288.5" y="66">1</text><text x="326.5" y="66">4</text><text x="173.5" y="104">5</text><text x="211.5" y="104">7</text><text x="250.5" y="104">8</text><text x="96.5" y="143">8</text><text x="135.5" y="143">4</text><text x="326.5" y="143">5</text><text x="20.5" y="181">7</text><text x="211.5" y="181">6</text><text x="250.5" y="181">1</text><text x="58.5" y="219">5</text><text x="96.5" y="219">2</text><text x="173.5" y="219">3</text><text x="250.5" y="219">6</text><text x="326.5" y="219">8</text><text x="135.5" y="296">2</text><text x="173.5" y="296">1</text><text x="58.5" y="334">3</text><text x="173.5" y="334">7</text></g>
+            <g class="given lit"><text x="58.5" y="258">1</text><text x="135.5" y="258">9</text><text x="173.5" y="258">4</text><text x="250.5" y="258">7</text><text x="288.5" y="258">8</text><text x="326.5" y="258">2</text></g>
+            <g class="entry"><text x="211.5" y="27">4</text><text x="173.5" y="65">6</text><text x="250.5" y="65">3</text><text x="135.5" y="103">3</text><text x="58.5" y="142">6</text><text x="173.5" y="142">2</text><text x="58.5" y="180">4</text><text x="173.5" y="180">8</text><text x="135.5" y="218">7</text><text x="211.5" y="218">9</text><text x="211.5" y="295">5</text><text x="135.5" y="333">6</text></g>
+            <g class="entry lit"><text x="20.5" y="257">5</text><text x="96.5" y="257">6</text><text x="211.5" y="257">3</text></g>
+            <g class="note"><text x="288.5" y="13.2">2</text><text x="288.5" y="23.5">5</text><text x="298.8" y="23.5">6</text><text x="278.2" y="33.8">7</text><text x="336.8" y="166.2">3</text><text x="336.8" y="186.8">9</text><text x="240.2" y="329.5">4</text><text x="250.5" y="329.5">5</text><text x="260.8" y="339.8">9</text></g>
+            <rect x="93.5" y="364" width="26" height="1" fill="url(#rule-in)"/>
+            <text class="caption" x="173.5" y="368">ROW COMPLETE</text>
+            <rect x="227.5" y="364" width="26" height="1" fill="url(#rule-out)"/>
+          </svg>
+          <figcaption>Every puzzle is generated on your device and has exactly one solution, so the game plays in full with no connection.</figcaption>
+        </figure>
+        <div>
+          <ul class="features">
+            <li>
+              <svg class="glyph-progress" viewBox="0 0 24 28" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0C13 8 17 12.6 24 13.8 17 14.9 13 19.5 12 27.5 11 19.5 7 14.9 0 13.8 7 12.6 11 8 12 0Z"/></svg>
+              <div>
+                <h3>One journey, no difficulty menu</h3>
+                <p>The journey hands you the next stop, and its difficulty comes with it, from easy to expert. Each attempt runs under that stop’s time limit and mistake limit. Solve it, and it becomes a star on the path behind you.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="glyph-daily" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l2.6 1.8"/></svg>
+              <div>
+                <h3>A daily challenge</h3>
+                <p>One extra puzzle each day, the same one for every player, and gone at midnight.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="glyph-progress" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M8 1.8a4.4 4.4 0 0 1 2.5 8 .8.8 0 0 0-.3.7v.7H5.8v-.7a.8.8 0 0 0-.3-.7 4.4 4.4 0 0 1 2.5-8z"/><path d="M6.3 13.4h3.4"/></svg>
+              <div>
+                <h3>Hints that give the reason</h3>
+                <p>A hint fills a square and names the technique that forces that digit there. Notes, undo and redo are there for working it out yourself.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="glyph-streak" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2c2 2.6 4.5 4.4 4.5 7A4.5 4.5 0 0 1 8 13.5 4.5 4.5 0 0 1 3.5 9C3.5 6.4 6 4.6 8 2z"/></svg>
+              <div>
+                <h3>A streak, and shields for it</h3>
+                <p>Solve something every day and a streak builds. Streak shields, earned by playing, cover a day you miss. Solving also earns experience, levels and badges.</p>
+              </div>
+            </li>
+          </ul>
+          <p class="facts">The game comes in English, Spanish, Portuguese, French, German and Italian.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-label="About the app">
+    <div class="wrap">
+      <div class="pair">
+        <div id="who-makes-it">
+          <h2>Who makes it</h2>
+          <p><span translate="no">Interstellar Sudoku</span> is made by <span translate="no">LigockiTech</span>, a technology, software and data consultancy in Florianópolis, Brazil. It is the first app we will publish ourselves.</p>
+          <p><a href="https://ligockitech.com/">Visit ligockitech.com</a></p>
+        </div>
+        <div id="privacy">
+          <h2>Your privacy</h2>
+          <p>Your puzzles, progress and settings are stored on your device, and we do not receive them. The app shows ads, and it sends usage measurements and crash reports to Google. The privacy policy says what is sent, and what you can switch off.</p>
+          <p><a href="/privacy">Read the privacy policy</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <rect width="120" height="120" fill="url(#mark-tile)"/>
+            <path d="M20 78h80M20 42h80M42 20v80M78 20v80" fill="none" stroke="#e8f2ee" stroke-opacity=".16" stroke-width="3" stroke-linecap="round"/>
+            <rect x="46" y="46" width="28" height="28" rx="6" fill="#3fd6b0"/>
+          </svg>
+          <span translate="no">Interstellar Sudoku</span>
+        </div>
+        <p>A sudoku that goes somewhere.</p>
+      </div>
+      <div>
+        <h2>Company information</h2>
+        <p class="legal-name" lang="pt-BR" translate="no">LIGOCKITECH CONSULTORIA EM TECNOLOGIA SOFTWARES E DADOS LTDA</p>
+        <address>
+          <span lang="pt-BR" translate="no">Av. Prefeito Osmar Cunha&nbsp;416, Sala&nbsp;1108</span><br>
+          <span lang="pt-BR" translate="no">Florianópolis, SC, <span class="nowrap">88015-100</span></span><br>
+          Brazil
+        </address>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@ligockitech.com">contact@ligockitech.com</a></p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <ul>
+          <li><a href="#how-it-plays">How it plays</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="https://ligockitech.com/">LigockiTech</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span translate="no">LigockiTech</span></p>
+      <p>This site sets no cookies and loads no trackers.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
